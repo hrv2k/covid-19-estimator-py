@@ -5,7 +5,7 @@ import dicttoxml
 import json
 import time
 
-DEBUG = True
+# DEBUG = True
 
 app = Flask(__name__)
 app.config.from_object(__name__)
@@ -159,7 +159,6 @@ def estimator(data):
 
 
 @app.route("/api/v1/on-covid-19", methods=["POST"])
-@app.route("/api/v1/on-covid-19/", methods=["POST"])
 @app.route("/api/v1/on-covid-19/json", methods=["POST"])
 def covid19_estimator():
     data = request.get_json()
@@ -236,5 +235,5 @@ def log_request(response):
 
 
 if __name__ == "__main__":
-    # app.run()
-    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))
+    app.run()
+    # app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))
