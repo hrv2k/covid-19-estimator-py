@@ -76,7 +76,7 @@ jobs:
 
     - name: Run Audits
       run: |
-        yarn jest audits/ch-1 --json --outputFile=audits/ch-1.json --noStackTrace
+        yarn jest audits/ch-1 --json --outputFile=audits/ch-1.json --verbose --debug --useStderr --no-cache
 
     - name: Report Audits
       uses: BuildforSDG-Cohort1-Assessment/jest-out@v1
@@ -86,7 +86,7 @@ jobs:
       if: always()
   
   ch-2:
-    needs: ch-1
+    # needs: ch-1
     name: audit challenge 2
     runs-on: macos-latest
 
@@ -135,7 +135,7 @@ jobs:
       if: always()
 
   ch-3:
-    needs: ch-2
+    # needs: ch-2
     name: audit challenge 3
     runs-on: macos-latest
 
@@ -262,7 +262,7 @@ jobs:
       if: always()
 
   ch-5:
-    needs: ch-3
+    # needs: ch-3
     name: audit backend API
     runs-on: macos-latest
 
