@@ -8,7 +8,7 @@ on:
 jobs:
   lint: 
     name: audit code style
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
 
     strategy:
       matrix:
@@ -38,7 +38,7 @@ jobs:
   ch-1:
     needs: lint
     name: audit challenge 1
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
 
     strategy:
       matrix:
@@ -73,6 +73,9 @@ jobs:
       with: 
         repository: BuildforSDG-Cohort1-Assessment/covid-19-estimator-audits-py
         path: audits
+      
+    - name: See test_suite content
+      run: ls -al
 
     - name: Run Audits
       run: |
@@ -88,7 +91,7 @@ jobs:
   ch-2:
     # needs: ch-1
     name: audit challenge 2
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
 
     strategy:
       matrix:
@@ -137,7 +140,7 @@ jobs:
   ch-3:
     # needs: ch-2
     name: audit challenge 3
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
 
     strategy:
       matrix:
@@ -186,7 +189,7 @@ jobs:
   lighthouse:
     needs: ch-3
     name: audit frontend app (lighthouse)
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
 
     strategy:
       matrix:
@@ -227,7 +230,7 @@ jobs:
   ch-4:
     needs: lighthouse
     name: audit frontend UI
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
 
     strategy:
       matrix:
@@ -264,7 +267,7 @@ jobs:
   ch-5:
     # needs: ch-3
     name: audit backend API
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
 
     strategy:
       matrix:
