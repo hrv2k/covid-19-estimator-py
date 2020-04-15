@@ -5,7 +5,7 @@ import dicttoxml
 import json
 import time
 
-# DEBUG = True
+DEBUG = True
 
 app = Flask(__name__)
 app.config.from_object(__name__)
@@ -73,9 +73,11 @@ def dollars_in_flight(
 
 
 def estimator(data):
+    data_input = {}
+    data_input = data
     impact = {}
     severeImpact = {}
-    output = {"data": data, "impact": impact, "severeImpact": severeImpact}
+    output = {"data": data_input, "impact": impact, "severeImpact": severeImpact}
 
     time_to_elapse_in_days = normalise_duration_in_days(
         data["timeToElapse"], data["periodType"]
@@ -183,7 +185,9 @@ def requests_logs():
         for line in log_file:
             logs.append(line)
 
-    return Response("".join(logs), status=200, mimetype="text/plain")
+    resp = Response("".join(logs), status=200, mimetype="text/plain")
+    resp.headers["Content-Type"] = "text/plain; charset=utf-8"
+    return resp
 
 
 @app.route("/api/v1/on-covid-19/test", methods=["GET"])
@@ -219,7 +223,7 @@ def start_time():
 @app.after_request
 def log_request(response):
     now = time.time()
-    duration = "{:02}ms".format(round((now - g.request_start_time)*1000, 2))
+    duration = "{:02}ms".format(int((now - g.request_start_time)*1000))
     # line = f"{request.method}\t\t{request.path}\t\t{response.status_code}\t\t{duration}"
     # app.logger.info(
     #     "{:4}\t{:26} {:>5}\t{:^3}".format(
@@ -227,7 +231,7 @@ def log_request(response):
     #     )
     # )
     app.logger.info(
-        "{}\t\t{}\t\t{}\t\t{}".format(
+        "{} {} {} {}".format(
             request.method, request.path, response.status_code, duration
         )
     )
@@ -235,5 +239,5 @@ def log_request(response):
 
 
 if __name__ == "__main__":
-    app.run()
-    # app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))
+    # app.run()
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))
