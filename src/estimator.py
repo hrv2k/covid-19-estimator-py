@@ -184,7 +184,7 @@ def requests_logs():
         for line in log_file:
             logs.append(line)
 
-    return Response("\n".join(logs), status=200, mimetype="text/plain")
+    return Response("".join(logs), status=200, mimetype="text/plain")
 
 
 @app.route("/api/v1/on-covid-19/test", methods=["GET"])
@@ -220,7 +220,7 @@ def start_time():
 @app.after_request
 def log_request(response):
     now = time.time()
-    duration = "{:02}ms".format(round(now - g.request_start_time, 2))
+    duration = "{:02}ms".format(round((now - g.request_start_time)*1000, 2))
     # line = f"{request.method}\t\t{request.path}\t\t{response.status_code}\t\t{duration}"
     # app.logger.info(
     #     "{:4}\t{:26} {:>5}\t{:^3}".format(
@@ -236,4 +236,5 @@ def log_request(response):
 
 
 if __name__ == "__main__":
+    # app.run()
     app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))
