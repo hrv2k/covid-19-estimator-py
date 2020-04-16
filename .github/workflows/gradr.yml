@@ -79,7 +79,7 @@ jobs:
 
     - name: Run Audits
       run: |
-        yarn test audits/ch-1 --json --outputFile=audits/ch-1.json --debug --useStderr --no-cache
+        yarn test audits/ch-1 --json --outputFile=audits/ch-1.json --debug --useStderr --coverage
 
     - name: Read ch-1.json content
       id: ch1output

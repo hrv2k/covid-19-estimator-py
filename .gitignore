@@ -27,3 +27,4 @@ covid19_estimator_py.egg-info/
 cloudbuild.yaml
 Dockerfile
 .gcloudignore
+.cache
