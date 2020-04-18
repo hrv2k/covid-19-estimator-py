@@ -73,11 +73,9 @@ def dollars_in_flight(
 
 
 def estimator(data):
-    data_input = {}
-    data_input = data
     impact = {}
     severeImpact = {}
-    output = {"data": data_input, "impact": impact, "severeImpact": severeImpact}
+    output = {"data": data, "impact": impact, "severeImpact": severeImpact}
 
     time_to_elapse_in_days = normalise_duration_in_days(
         data["timeToElapse"], data["periodType"]
